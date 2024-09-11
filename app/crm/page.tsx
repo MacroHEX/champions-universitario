@@ -7,7 +7,7 @@ import {Prisma} from '@prisma/client';
 
 const Page = async () => {
 
-  const modalidades: GetFindResult<Prisma.$ModalityPayload<DefaultArgs>, Prisma.ModalityFindManyArgs<DefaultArgs>, {}>[] = await listarModalidades()
+  const modalidades: GetFindResult<Prisma.$ModalityPayload<DefaultArgs>, Prisma.ModalityFindManyArgs<DefaultArgs>, object>[] = await listarModalidades();
 
   return (
     <div className="container mx-auto p-4">

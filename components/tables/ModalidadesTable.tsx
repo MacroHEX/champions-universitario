@@ -3,7 +3,7 @@ import {DefaultArgs, GetFindResult} from "@prisma/client/runtime/library";
 import {Prisma} from "@prisma/client";
 
 type Props = {
-  data: GetFindResult<Prisma.$ModalityPayload<DefaultArgs>, Prisma.ModalityFindManyArgs<DefaultArgs>, {}>[];
+  data: GetFindResult<Prisma.$ModalityPayload<DefaultArgs>, Prisma.ModalityFindManyArgs<DefaultArgs>, object>[];
 }
 
 export function ModalidadesTable({data}: Props) {
