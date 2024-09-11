@@ -7,7 +7,7 @@ const Modalidades = () => {
         <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-center mb-8 text-slate-900">
           Modalidades
         </h2>
-        <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-3">
+        <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-3 text-center">
           <div className="flex flex-col items-center space-y-2 border-slate-200 p-4 rounded-lg bg-white shadow-sm">
             <h3 className="text-2xl font-bold text-teal-600">Futsal (Masculino)</h3>
             <p className="text-center text-slate-600">Fase de grupos seguida de eliminatorias</p>

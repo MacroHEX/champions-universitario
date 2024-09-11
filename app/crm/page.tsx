@@ -8,10 +8,10 @@ import {Prisma} from '@prisma/client';
 const Page = async () => {
 
   const modalidades: GetFindResult<Prisma.$ModalityPayload<DefaultArgs>, Prisma.ModalityFindManyArgs<DefaultArgs>, object>[] = await listarModalidades();
-
+console.log(modalidades)
   return (
     <div className="container mx-auto p-4">
-      <ModalidadesTable data={modalidades}/>
+      {/*<ModalidadesTable data={modalidades}/>*/}
     </div>
   );
 };

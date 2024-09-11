@@ -12,10 +12,10 @@ const Header = () => {
         <span className="ml-2 text-xl font-semibold text-slate-800">Champions Universitario</span>
       </Link>
       <nav className="ml-auto flex gap-4 sm:gap-6">
-        <Link className="text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors" href="#about">
+        <Link className="text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors" href="/#about">
           Acerca
         </Link>
-        <Link className="text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors" href="#sports">
+        <Link className="text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors" href="/#sports">
           Modalidades
         </Link>
       </nav>

@@ -13,60 +13,67 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// Modalidad = Masculino / Femenino
-model Modality {
-  id   BigInt @id @default(autoincrement())
-  name String
-
-  teamModalities TeamModality[]
+model Student {
+  id           String        @id @default(uuid()) @db.Uuid
+  name         String
+  ci           String        @unique
+  career       String
+  TeamStudents TeamStudent[]
 }
 
 model Team {
-  id   BigInt @id @default(autoincrement())
-  name String
-
-  players            Player[]
-  teamModalities     TeamModality[]
-  futsalMatches1     FutsalMatch[]     @relation("futsalTeam1")
-  futsalMatches2     FutsalMatch[]     @relation("futsalTeam2")
-  volleyballMatches1 VolleyballMatch[] @relation("volleyballTeam1")
-  volleyballMatches2 VolleyballMatch[] @relation("volleyballTeam2")
+  id                       String            @id @default(uuid()) @db.Uuid
+  name                     String
+  TeamModalities           TeamModality[]
+  TeamStudents             TeamStudent[]
+  FutsalMatchesAsTeam1     FutsalMatch[]     @relation("Team1FutsalMatches")
+  FutsalMatchesAsTeam2     FutsalMatch[]     @relation("Team2FutsalMatches")
+  VolleyballMatchesAsTeam1 VolleyballMatch[] @relation("Team1VolleyballMatches")
+  VolleyballMatchesAsTeam2 VolleyballMatch[] @relation("Team2VolleyballMatches")
 }
 
-model Player {
-  id   BigInt @id @default(autoincrement())
-  name String
-
-  team   Team   @relation(fields: [teamId], references: [id])
-  teamId BigInt
+model Modality {
+  id             String         @id @default(uuid()) @db.Uuid
+  name           String
+  TeamModalities TeamModality[]
 }
 
 model TeamModality {
-  id         BigInt   @id @default(autoincrement())
+  id         String   @id @default(uuid()) @db.Uuid
   team       Team     @relation(fields: [teamId], references: [id])
-  teamId     BigInt
+  teamId     String   @db.Uuid
   modality   Modality @relation(fields: [modalityId], references: [id])
-  modalityId BigInt
+  modalityId String   @db.Uuid
+}
+
+model TeamStudent {
+  id        String  @id @default(uuid()) @db.Uuid
+  team      Team    @relation(fields: [teamId], references: [id])
+  teamId    String  @db.Uuid
+  student   Student @relation(fields: [studentId], references: [id])
+  studentId String  @db.Uuid
 }
 
 model FutsalMatch {
-  id         BigInt   @id @default(autoincrement())
-  date       DateTime
-  team1      Team     @relation("futsalTeam1", fields: [team1Id], references: [id])
-  team1Id    BigInt
-  team2      Team     @relation("futsalTeam2", fields: [team2Id], references: [id])
-  team2Id    BigInt
-  team1Score Int
-  team2Score Int
+  id         String   @id @default(uuid()) @db.Uuid
+  team1      Team     @relation("Team1FutsalMatches", fields: [team1Id], references: [id])
+  team1Id    String   @db.Uuid
+  team2      Team     @relation("Team2FutsalMatches", fields: [team2Id], references: [id])
+  team2Id    String   @db.Uuid
+  team1Goals Int
+  team2Goals Int
+  matchDate  DateTime @default(now())
 }
 
 model VolleyballMatch {
-  id           BigInt   @id @default(autoincrement())
-  date         DateTime
-  team1        Team     @relation("volleyballTeam1", fields: [team1Id], references: [id])
-  team1Id      BigInt
-  team2        Team     @relation("volleyballTeam2", fields: [team2Id], references: [id])
-  team2Id      BigInt
-  team1SetsWon Int
-  team2SetsWon Int
+  id          String   @id @default(uuid()) @db.Uuid
+  team1       Team     @relation("Team1VolleyballMatches", fields: [team1Id], references: [id])
+  team1Id     String   @db.Uuid
+  team2       Team     @relation("Team2VolleyballMatches", fields: [team2Id], references: [id])
+  team2Id     String   @db.Uuid
+  team1Sets   Int[]
+  team2Sets   Int[]
+  team1Points Int
+  team2Points Int
+  matchDate   DateTime @default(now())
 }
