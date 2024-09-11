@@ -1,0 +1,97 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model SportsTeam {
+  id        BigInt   @id @default(autoincrement())
+  name      String
+  sport     String
+  category  Category
+  createdAt DateTime @default(now()) @map("created_at")
+
+  // Relations
+  players       Player[]
+  matches1      Match[]           @relation("team1Matches")
+  matches2      Match[]           @relation("team2Matches")
+  matchesWon    Match[]           @relation("matchesWinner")
+  futsal1       FutsalMatch[]     @relation("futsal1")
+  futsal2       FutsalMatch[]     @relation("futsal2")
+  futsalWon     FutsalMatch[]     @relation("futsalWinner")
+  volleyball1   VolleyballMatch[] @relation("volleyball1")
+  volleyball2   VolleyballMatch[] @relation("volleyball2")
+  volleyballWon VolleyballMatch[] @relation("volleyballWinner")
+}
+
+model Match {
+  id         BigInt     @id @default(autoincrement())
+  team1      SportsTeam @relation("team1Matches", fields: [team1Id], references: [id])
+  team1Id    BigInt
+  team2      SportsTeam @relation("team2Matches", fields: [team2Id], references: [id])
+  team2Id    BigInt
+  sport      String
+  matchDate  DateTime?  @map("match_date")
+  scoreTeam1 Int        @default(0)
+  scoreTeam2 Int        @default(0)
+  winner     SportsTeam @relation("matchesWinner", fields: [winnerId], references: [id])
+  winnerId   BigInt
+  stage      String
+  createdAt  DateTime   @default(now()) @map("created_at")
+}
+
+model Player {
+  id        BigInt   @id @default(autoincrement())
+  name      String
+  position  String?
+  createdAt DateTime @default(now()) @map("created_at")
+
+  // Relations
+  team   SportsTeam @relation(fields: [teamId], references: [id])
+  teamId BigInt
+}
+
+model FutsalMatch {
+  id         BigInt     @id @default(autoincrement())
+  team1      SportsTeam @relation("futsal1", fields: [team1Id], references: [id])
+  team1Id    BigInt
+  team2      SportsTeam @relation("futsal2", fields: [team2Id], references: [id])
+  team2Id    BigInt
+  matchDate  DateTime?  @map("match_date")
+  scoreTeam1 Int        @default(0)
+  scoreTeam2 Int        @default(0)
+  winner     SportsTeam @relation("futsalWinner", fields: [winnerId], references: [id])
+  winnerId   BigInt
+  stage      String
+  createdAt  DateTime   @default(now()) @map("created_at")
+}
+
+model VolleyballMatch {
+  id        BigInt     @id @default(autoincrement())
+  team1     SportsTeam @relation("volleyball1", fields: [team1Id], references: [id])
+  team1Id   BigInt
+  team2     SportsTeam @relation("volleyball2", fields: [team2Id], references: [id])
+  team2Id   BigInt
+  matchDate DateTime?  @map("match_date")
+  setsTeam1 Int        @default(0)
+  setsTeam2 Int        @default(0)
+  winner    SportsTeam @relation("volleyballWinner", fields: [winnerId], references: [id])
+  winnerId  BigInt
+  stage     String
+  createdAt DateTime   @default(now()) @map("created_at")
+}
+
+enum Category {
+  FEMENINO
+  MASCULINO
+  MIXTO
+}
