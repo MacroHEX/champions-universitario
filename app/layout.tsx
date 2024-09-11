@@ -2,6 +2,7 @@ import type {Metadata} from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Head from "next/head";
+import HeaderFooter from "@/components/HeaderFooter";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -29,10 +30,11 @@ export default function RootLayout({
     <Head>
       <title>Juegos Champions Universitarios</title>
     </Head>
-    <body
-      className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-    >
-    {children}
+    <body className={`${geistSans.variable} ${geistMono.variable} antialiased h-full`}>
+    {/* Wrap the children inside the new client-side Header/Footer component */}
+    <HeaderFooter>
+      {children}
+    </HeaderFooter>
     </body>
     </html>
   );

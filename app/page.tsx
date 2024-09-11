@@ -6,9 +6,7 @@ import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
 import Modalidades from "@/components/sections/Modalidades";
 import Countdown from "@/components/sections/Countdown";
-import Header from "@/components/sections/Header";
 import AreYouready from "@/components/sections/AreYouready";
-import Footer from "@/components/sections/Footer";
 
 export default function LandingPage() {
 
@@ -35,15 +33,12 @@ export default function LandingPage() {
     <div className="flex flex-col min-h-screen bg-slate-50">
 
       <main className="flex-1">
-        <Header/>
         <Hero/>
         <About/>
         <Modalidades/>
         <Countdown/>
         <AreYouready/>
       </main>
-
-      <Footer/>
 
       {showBackToTop && (
         <button

@@ -5,7 +5,7 @@ import {Calendar, Trophy, Users} from "lucide-react";
 const About = () => {
   return (
     <section id="about" className="w-full py-6 md:py-12 lg:py-24 bg-white">
-      <div className="container px-4 md:px-6">
+      <div className="container mx-auto px-4 md:px-6">
         <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-center mb-8 text-slate-900">
           Acerca del Evento
         </h2>
