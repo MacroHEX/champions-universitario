@@ -18,6 +18,12 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title: "Juegos Champions Universitarios",
   description: ":3",
+  openGraph: {
+    title: 'Juegos Champions Universitarios',
+    images: 'https://champions-universitario.vercel.app/api/og',
+    description: ':3',
+    authors: 'Martin Medina'
+  }
 };
 
 export default function RootLayout({
