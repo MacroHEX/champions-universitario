@@ -1,9 +1,12 @@
 import React from 'react';
+import PrivateContent from "@/screens/PrivateContent";
+
 
 const Page = () => {
+
   return (
     <div>
-      Hola :3
+      <PrivateContent/>
     </div>
   );
 };
